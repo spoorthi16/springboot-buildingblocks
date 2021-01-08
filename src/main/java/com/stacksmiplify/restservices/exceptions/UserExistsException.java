@@ -1,5 +1,6 @@
 package com.stacksmiplify.restservices.exceptions;
 
+
 public class UserExistsException extends Exception {
 
 	/**
@@ -11,6 +12,8 @@ public class UserExistsException extends Exception {
 		super(message);
 		
 	}
+}
 
 	
-}
+
+

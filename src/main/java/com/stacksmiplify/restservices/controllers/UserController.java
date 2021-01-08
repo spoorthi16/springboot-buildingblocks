@@ -42,6 +42,7 @@ public class UserController {
 	//@PostMapping Annotation
 	@PostMapping("/users")
 	public ResponseEntity<Void> createUser(@RequestBody User user , UriComponentsBuilder builder) {
+
 		 try{
 			  userService.CreateUser(user);
 			  HttpHeaders headers = new HttpHeaders();
@@ -50,27 +51,35 @@ public class UserController {
 		 }catch(UserExistsException ex) {
 			 throw new ResponseStatusException(HttpStatus.BAD_REQUEST , ex.getMessage());
 		 }
+
 	}
 	
 	//getUserById 
 	@GetMapping("/users/{id}")
 	public Optional<User> getUserById(@PathVariable("id") Long id) {
+
 		try{
 			return userService.getUserById(id); 
 		}catch(UserNotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND , ex.getMessage());
 		}
+		 
+
+
 		
 	}
 	
 	//updateUserById
 	@PutMapping("/users/{id}")
 	public User updateUserById(@PathVariable("id") Long id , @RequestBody User user) {
+
 		try{
 			return userService.updateUserById(id, user);
 		}catch(UserNotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST , ex.getMessage());
 		}
+		
+
 		
 	}
 	

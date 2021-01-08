@@ -35,31 +35,45 @@ public class UserService {
 		//if user exists using username
 		User existingUser = userRepository.findByUsername(user.getUsername());
 		
+
 		
 		//if not throw UserExistsException
 	if(existingUser != null) {
 		throw new UserExistsException("User already exists in Repository");
 	}
 	
+
+		
+		
+
 		return userRepository.save(user);
 	}
 	
 	//getUserByID
 	public Optional<User> getUserById(Long id) throws UserNotFoundException {
 		Optional<User> user = userRepository.findById(id);
+
 		if(!user.isPresent()) {
 			throw new UserNotFoundException("UserNot found in User Repository");
+
+		
+		
 		}
 		return user;
 	}
 	
 	
 	//updateUserById
+
 	public User updateUserById( Long id , User user) throws UserNotFoundException{
 		Optional<User> optionaluser = userRepository.findById(id);
 		if(!optionaluser.isPresent()) {
 			throw new UserNotFoundException("UserNot found in User Repository , provide the correct user ID");
 		}
+
+	
+		
+
 		user.setId(id);
 		
 		return userRepository.save(user);
@@ -68,10 +82,14 @@ public class UserService {
 	
 	//deleteUserById
 	public void deleteUserById(Long id)  {
+
 		Optional<User> optionaluser = userRepository.findById(id);
 		if(!optionaluser.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST ,"UserNot found in User Repository , provide the correct user ID");
 		}	
+
+
+
 		userRepository.deleteById(id);
 	}
 	
