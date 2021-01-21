@@ -3,6 +3,8 @@ package com.stacksmiplify.restservices.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,7 +43,7 @@ public class UserController {
 	//@RequestBody annotation
 	//@PostMapping Annotation
 	@PostMapping("/users")
-	public ResponseEntity<Void> createUser(@RequestBody User user , UriComponentsBuilder builder) {
+	public ResponseEntity<Void> createUser(@Valid  @RequestBody User user , UriComponentsBuilder builder) {
 
 		 try{
 			  userService.CreateUser(user);
