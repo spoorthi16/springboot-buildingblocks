@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,6 +25,7 @@ import com.stacksmiplify.restservices.services.UserService;
 
 //Controller
 @RestController
+@RequestMapping(value ="/users")
 public class UserController {
 
 	//Autowire the userService
@@ -31,7 +33,7 @@ public class UserController {
 	private UserService userService ;
 	
 	//getAllUsers Method
-	@GetMapping("/users")
+	@GetMapping
 	public List<User> getAllUsers(){
 		
 		return userService.getAllUsers();
@@ -40,7 +42,7 @@ public class UserController {
 	//create User method -
 	//@RequestBody annotation
 	//@PostMapping Annotation
-	@PostMapping("/users")
+	@PostMapping
 	public ResponseEntity<Void> createUser(@RequestBody User user , UriComponentsBuilder builder) {
 
 		 try{
@@ -55,7 +57,7 @@ public class UserController {
 	}
 	
 	//getUserById 
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public Optional<User> getUserById(@PathVariable("id") Long id) {
 
 		try{
@@ -70,7 +72,7 @@ public class UserController {
 	}
 	
 	//updateUserById
-	@PutMapping("/users/{id}")
+	@PutMapping("/{id}")
 	public User updateUserById(@PathVariable("id") Long id , @RequestBody User user) {
 
 		try{
@@ -84,13 +86,13 @@ public class UserController {
 	}
 	
 	//deleteUserByID
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteUserById(@PathVariable("id") Long id) {
 		userService.deleteUserById(id);
 	}
 	
 	//getUserByUsernmae
-	@GetMapping("/users/byusername/{username}")
+	@GetMapping("/byusername/{username}")
 	public User getUserByUsername(@PathVariable("username") String username) {
 		return userService.getUserByUSername(username);
 	}
